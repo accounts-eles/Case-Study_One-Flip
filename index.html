@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: One Flip Card Template</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the 3D flip effect and brand colors */
+        
+        /* Brand Colors */
+        :root {
+            --color-primary: #1f2a52; /* Deep Blue/Navy */
+            --color-accent: #00bec7; /* Cyan/Teal */
+            --color-light: #d2f0f0; /* Very light Cyan */
+            --color-neutral: #abb5bf; /* Light Gray/Blue-Gray */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-light); /* Light Background */
+        }
+
+        /* Flip Card Container */
+        .flip-card {
+            background-color: transparent;
+            /* Use relative units for fluid width, maxing out at a reasonable size */
+            width: 95%; 
+            max-width: 500px;
+            height: 350px; /* Increased height slightly for better content display */
+            perspective: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Inner container handles the rotation */
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        /* State when flipped */
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Front and Back of the card */
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--color-primary); /* Primary border color */
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            box-sizing: border-box;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            backface-visibility: hidden; /* Crucial for 3D effect */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Front specific styles */
+        .flip-card-front {
+            background-color: white; /* Clean white background */
+            color: var(--color-primary);
+            flex-direction: column;
+            text-align: center;
+        }
+
+        /* Back specific styles */
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background-color: var(--color-accent); /* Accent background */
+            color: white; /* Changed text color to white for better contrast */
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .flip-card-back ul {
+            padding-left: 20px;
+            margin: 0;
+            list-style: disc;
+        }
+
+        /* Button styling using brand colors */
+        .flip-button {
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            background-color: var(--color-primary); /* Primary color */
+            color: white;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .flip-button:hover {
+            background-color: #1a2347; /* Slightly darker primary on hover */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        .flip-button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-xl mx-auto text-center">
+        <!-- Title & Instructions --><h1 class="title text-3xl font-extrabold mb-2" style="color: var(--color-primary);">
+            Case Study Activity Template
+        </h1>
+        <p class="instructions text-lg mb-8" style="color: var(--color-primary);">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam.
+        </p>
+
+        <div class="flip-card" id="caseStudyCard">
+            <div class="flip-card-inner">
+                <!-- FRONT: Scenario (Reduced Text) --><div class="flip-card-front">
+                    <!-- Scenario Text now fills the whole space --><div class="text-lg flex flex-col justify-center h-full">
+                        <p class="mb-6 font-medium">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Ut enim ad minim veniam.
+                        </p>
+                        <p class="font-bold text-xl">
+                            Quis custodiet ipsos custodes?
+                        </p>
+                        <p class="text-sm italic mt-4" style="color: var(--color-neutral);">
+                            Consider your response before flipping to reveal the solution.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- BACK: Solution/Correct Response (Reduced List Items) --><div class="flip-card-back">
+                    <h2 class="text-xl font-bold mb-3 uppercase">Correct Response</h2>
+                    <ul class="text-lg space-y-2">
+                        <li>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</li>
+                        <li>Excepteur sint occaecat cupidatat non proident.</li>
+                        <li>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</li>
+                        <li>Laudantium, totam rem aperiam, eaque ipsa quae ab illo.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls --><div class="card-controls mt-6">
+            <button class="flip-button" onclick="flipCard()">
+                Flip Card
+            </button>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Toggles the 'flipped' class on the card to trigger the 3D rotation.
+         */
+        function flipCard() {
+            document.getElementById("caseStudyCard").classList.toggle("flipped");
+        }
+    </script>
+
+</body>
+</html>
